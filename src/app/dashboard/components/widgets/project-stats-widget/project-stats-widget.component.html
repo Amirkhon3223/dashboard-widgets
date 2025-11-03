@@ -1,0 +1,61 @@
+<div class="stats-grid">
+  <div class="stat-card stat-card-primary">
+    <div class="stat-icon">
+      <i class="pi pi-briefcase"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ stats().totalProjects }}</div>
+      <div class="stat-label">Total Projects</div>
+    </div>
+  </div>
+
+  <div class="stat-card stat-card-success">
+    <div class="stat-icon">
+      <i class="pi pi-check-circle"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ stats().activeProjects }}</div>
+      <div class="stat-label">Active</div>
+    </div>
+  </div>
+
+  <div class="stat-card stat-card-info">
+    <div class="stat-icon">
+      <i class="pi pi-calendar-check"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ stats().completedProjects }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+  </div>
+
+  <div class="stat-card stat-card-warning">
+    <div class="stat-icon">
+      <i class="pi pi-clock"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ pendingProjects() }}</div>
+      <div class="stat-label">Pending</div>
+    </div>
+  </div>
+
+  <div class="stat-card stat-card-secondary">
+    <div class="stat-icon">
+      <i class="pi pi-pause"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ onHoldProjects() }}</div>
+      <div class="stat-label">On Hold</div>
+    </div>
+  </div>
+
+  <div class="stat-card stat-card-gradient">
+    <div class="stat-icon">
+      <i class="pi pi-chart-line"></i>
+    </div>
+    <div class="stat-content">
+      <div class="stat-value">{{ stats().averageProgress }}%</div>
+      <div class="stat-label">Avg Progress</div>
+    </div>
+  </div>
+</div>

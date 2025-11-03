@@ -1,0 +1,45 @@
+<p-card class="widget-card">
+  <ng-template pTemplate="header">
+    <div class="widget-header">
+      <h3 class="widget-title">{{ widget().title }}</h3>
+      <div class="widget-actions">
+        <p-button
+          icon="pi pi-times"
+          (onClick)="onRemove()"
+          [text]="true"
+          [rounded]="true"
+          severity="danger"
+          size="small"
+          pTooltip="Remove Widget"
+          tooltipPosition="left"
+        />
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="widget-content">
+    @switch (widget().type) {
+      @case (WidgetType.PROJECT_STATS) {
+        <app-project-stats-widget />
+      }
+      @case (WidgetType.REAL_TIME_UPDATES) {
+        <app-real-time-updates-widget />
+      }
+      @case (WidgetType.PROJECT_LIST) {
+        <app-project-list-widget [config]="widget().config" />
+      }
+      @case (WidgetType.PROGRESS_CHART) {
+        <app-progress-chart-widget [config]="widget().config" />
+      }
+      @case (WidgetType.TIMELINE) {
+        <app-timeline-widget />
+      }
+      @default {
+        <div class="unknown-widget">
+          <i class="pi pi-question-circle"></i>
+          <p>Unknown widget type: {{ widget().type }}</p>
+        </div>
+      }
+    }
+  </div>
+</p-card>

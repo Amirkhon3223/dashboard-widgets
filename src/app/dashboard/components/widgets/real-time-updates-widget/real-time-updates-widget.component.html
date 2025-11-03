@@ -1,0 +1,52 @@
+<div class="real-time-widget">
+  <div class="update-header">
+    <div class="live-indicator">
+      <span class="pulse"></span>
+      <span class="live-text">LIVE</span>
+    </div>
+    <div class="last-update">
+      Last update: {{ lastUpdate() | date: 'HH:mm:ss' }}
+    </div>
+  </div>
+
+  <div class="updates-list">
+    @if (recentUpdates().length > 0) {
+      @for (update of recentUpdates(); track update.timestamp) {
+        <div class="update-item">
+          <div class="update-icon">
+            <i class="pi pi-arrow-up"></i>
+          </div>
+          <div class="update-content">
+            <div class="update-project-name">
+              {{ update.project.name }}
+              <p-badge
+                [value]="update.project.status"
+                [severity]="getStatusSeverity(update.project.status)"
+              />
+            </div>
+            <div class="update-progress">
+              <p-progressBar
+                [value]="update.project.progress"
+                [showValue]="false"
+                [style]="{ height: '6px' }"
+              />
+              <span class="progress-text">
+                {{ update.project.progress }}% ({{ update.project.tasksCompleted }}/{{
+                  update.project.tasksTotal
+                }}
+                tasks)
+              </span>
+            </div>
+            <div class="update-time">{{ getTimeSinceUpdate(update.timestamp) }}</div>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="no-updates">
+        <i class="pi pi-info-circle"></i>
+        <p>Waiting for updates...</p>
+        <small>Projects will auto-update every 5 seconds</small>
+      </div>
+    }
+  </div>
+</div>

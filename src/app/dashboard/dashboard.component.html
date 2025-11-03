@@ -1,0 +1,128 @@
+<div class="dashboard-container">
+  <p-toolbar class="dashboard-toolbar">
+    <div class="toolbar-start">
+      <h1 class="dashboard-title">
+        <i class="pi pi-chart-line"></i>
+        Project Dashboard
+      </h1>
+    </div>
+    <div class="toolbar-end">
+      <p-button
+        icon="pi pi-plus"
+        (onClick)="openAddWidgetDialog()"
+        [text]="true"
+        [rounded]="true"
+        pTooltip="Add Widget"
+        tooltipPosition="bottom"
+        severity="success"
+      />
+      <p-button
+        icon="pi pi-replay"
+        (onClick)="resetDashboard()"
+        [text]="true"
+        [rounded]="true"
+        pTooltip="Reset Dashboard"
+        tooltipPosition="bottom"
+        severity="danger"
+      />
+    </div>
+  </p-toolbar>
+
+  <div class="dashboard-content">
+    <div
+      cdkDropList
+      cdkDropListOrientation="horizontal"
+      class="widget-grid"
+      [cdkDropListData]="getVisibleWidgets()"
+      (cdkDropListDropped)="drop($event)"
+    >
+      @for (widget of getVisibleWidgets(); track widget.id) {
+        <div
+          cdkDrag
+          class="widget-wrapper"
+          [attr.data-widget-id]="widget.id"
+          (cdkDragMoved)="onDragMoved($event)"
+        >
+          <div class="widget-item" cdkDragHandle>
+            <app-widget-container
+              [widget]="widget"
+              (remove)="removeWidget($event)"
+              (toggleVisibility)="toggleWidgetVisibility($event)"
+            />
+          </div>
+
+          <div
+            class="drag-placeholder"
+            *cdkDragPlaceholder
+            [style.min-width.px]="350"
+            [style.max-width.px]="350"
+          ></div>
+        </div>
+      }
+    </div>
+
+    @if (!getVisibleWidgets().length) {
+      <div class="empty-state">
+        <i class="pi pi-inbox empty-icon"></i>
+        <h3>No widgets to display</h3>
+        <p>Add widgets to customize your dashboard</p>
+        <p-button
+          label="Reset to Default"
+          icon="pi pi-replay"
+          (onClick)="resetDashboard()"
+        />
+      </div>
+    }
+  </div>
+
+  <p-dialog
+    [(visible)]="showAddWidgetDialog"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '450px' }"
+    header="Add New Widget"
+  >
+    <div class="add-widget-form">
+      <div class="form-field">
+        <label for="widget-type">Widget Type</label>
+        <p-select
+          id="widget-type"
+          [(ngModel)]="newWidget.type"
+          [options]="widgetTypes"
+          optionLabel="label"
+          appendTo="body"
+          optionValue="value"
+          placeholder="Select a widget type"
+          [style]="{ width: '100%' }"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="widget-title">Widget Title</label>
+        <input
+          id="widget-title"
+          type="text"
+          pInputText
+          [(ngModel)]="newWidget.title"
+          placeholder="Enter widget title"
+          [style]="{ width: '100%' }"
+        />
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <p-button
+        label="Cancel"
+        severity="secondary"
+        (onClick)="showAddWidgetDialog.set(false)"
+        [text]="true"
+      />
+      <p-button
+        label="Add Widget"
+        (onClick)="addWidget()"
+        [disabled]="!newWidget.title.trim()"
+      />
+    </ng-template>
+  </p-dialog>
+</div>

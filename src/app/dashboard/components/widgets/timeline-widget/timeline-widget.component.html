@@ -1,0 +1,54 @@
+<div class="timeline-widget">
+  @if (timelineEvents().length > 0) {
+    <p-timeline [value]="timelineEvents()" align="alternate" styleClass="custom-timeline">
+      <ng-template pTemplate="marker" let-event>
+        <div
+          class="timeline-marker"
+          [style.background-color]="event.color"
+          [class.past]="isPast(event.date)"
+          [class.upcoming]="isUpcoming(event.date)"
+        >
+          <i [class]="event.icon"></i>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="content" let-event>
+        <p-card class="timeline-card" [class.past-event]="isPast(event.date)">
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h4 class="project-name">{{ event.project.name }}</h4>
+              <p-tag
+                [value]="event.project.status"
+                [severity]="getStatusSeverity(event.project.status)"
+                [style]="{ 'font-size': '0.7rem' }"
+              />
+            </div>
+
+            <div class="timeline-details">
+              <div class="event-type">
+                <i [class]="event.icon" [style.color]="event.color"></i>
+                <span>{{ event.status }}</span>
+              </div>
+              <div class="event-date">
+                <i class="pi pi-calendar"></i>
+                <span>{{ formatDate(event.date) }}</span>
+              </div>
+            </div>
+
+            <div class="progress-info">
+              <span class="progress-text">{{ event.project.progress }}% Complete</span>
+              <span class="tasks-text"
+                >{{ event.project.tasksCompleted }}/{{ event.project.tasksTotal }} tasks</span
+              >
+            </div>
+          </div>
+        </p-card>
+      </ng-template>
+    </p-timeline>
+  } @else {
+    <div class="empty-timeline">
+      <i class="pi pi-calendar-times"></i>
+      <p>No timeline events available</p>
+    </div>
+  }
+</div>

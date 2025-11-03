@@ -1,0 +1,74 @@
+<div class="project-list-widget">
+  @if (filteredProjects().length > 0) {
+    @for (project of filteredProjects(); track project.id) {
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-info">
+            <h4 class="project-name">{{ project.name }}</h4>
+            <p-tag
+              [value]="project.status"
+              [severity]="getStatusSeverity(project.status)"
+              [style]="{ 'font-size': '0.75rem' }"
+            />
+          </div>
+        </div>
+
+        <div class="project-body">
+          @if (project.description) {
+            <p class="project-description">{{ project.description }}</p>
+          }
+
+          <div class="project-progress">
+            <div class="progress-header">
+              <span class="progress-label">Progress</span>
+              <span class="progress-value">{{ project.progress }}%</span>
+            </div>
+            <p-progressBar
+              [value]="project.progress"
+              [showValue]="false"
+              [style]="{
+                height: '8px',
+                'background-color': '#e2e8f0',
+                'border-radius': '4px'
+              }"
+              [pt]="{
+                value: {
+                  style: {
+                    background: getProgressColor(project.progress)
+                  }
+                }
+              }"
+            />
+          </div>
+
+          <div class="project-stats">
+            <div class="stat-item">
+              <i class="pi pi-check-circle"></i>
+              <span>{{ project.tasksCompleted }}/{{ project.tasksTotal }} tasks</span>
+            </div>
+            <div class="stat-item">
+              <i class="pi pi-calendar"></i>
+              <span>{{ getDaysRemaining(project.endDate) }} days left</span>
+            </div>
+          </div>
+
+          @if (project.team && project.team.length) {
+            <div class="project-team">
+              <i class="pi pi-users"></i>
+              <div class="team-members">
+                @for (member of project.team; track member) {
+                  <span class="team-member">{{ member }}</span>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="empty-message">
+      <i class="pi pi-inbox"></i>
+      <p>No projects found matching the current filters</p>
+    </div>
+  }
+</div>

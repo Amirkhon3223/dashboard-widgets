@@ -1,0 +1,182 @@
+.project-list-widget {
+  height: 100%;
+  overflow-y: auto;
+
+  ::ng-deep {
+    .p-dataview-content {
+      background: transparent;
+    }
+  }
+}
+
+.project-card {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #edf2f7;
+    border-color: #cbd5e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.project-header {
+  margin-bottom: 1rem;
+
+  .project-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .project-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    flex: 1;
+  }
+}
+
+.project-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .project-description {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #718096;
+    line-height: 1.5;
+  }
+
+  .project-progress {
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      .progress-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4a5568;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .progress-value {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #2d3748;
+      }
+    }
+  }
+
+  .project-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: #4a5568;
+
+      i {
+        color: #667eea;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .project-team {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e2e8f0;
+
+    i {
+      color: #667eea;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .team-members {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      flex: 1;
+
+      .team-member {
+        padding: 0.25rem 0.75rem;
+        background: white;
+        border: 1px solid #cbd5e0;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        color: #4a5568;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #667eea;
+          color: white;
+          border-color: #667eea;
+        }
+      }
+    }
+  }
+}
+
+.empty-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #a0aec0;
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #718096;
+  }
+}
+
+.project-list-widget::-webkit-scrollbar {
+  width: 6px;
+}
+
+.project-list-widget::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.project-list-widget::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 10px;
+
+  &:hover {
+    background: #a0aec0;
+  }
+}
